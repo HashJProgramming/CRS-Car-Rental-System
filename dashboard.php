@@ -1,3 +1,6 @@
+<?php
+include_once "functions/authentications.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,6 +63,12 @@
     <a class="nav-link" href="customers.php">
       <i class="fas fa-fw fa-users"></i>
       <span>Customer Section</span></a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="functions/user-logout.php">
+      <i class="fas fa-fw fa-users"></i>
+      <span>Logout</span></a>
   </li>
 
   <hr class="sidebar-divider d-none d-md-block">

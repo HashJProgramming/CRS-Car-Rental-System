@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if(isset(  $_SESSION['username'])){
+    header('location: dashboard.php');
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +40,7 @@
                             <div class="bs-icon-xl bs-icon-circle bs-icon-primary-light bs-icon my-4" style="background: rgba(223,78,78,0.2);"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-person" style="color: var(--pink);">
                                     <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"></path>
                                 </svg></div>
-                            <form class="text-center" method="post">
+                            <form class="text-center" action="functions/user-login.php" method="post">
                                 <div class="mb-3"><input class="form-control" type="text" name="username" placeholder="Username" required=""></div>
                                 <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password" required=""></div>
                                 <div class="mb-3"><button class="btn btn-danger d-block w-100" type="submit">Login</button></div>
@@ -54,6 +62,14 @@
     <script src="assets/js/jquery.easing.js"></script>
     <script src="assets/js/jquery.easing.min.js"></script>
     <script src="assets/js/theme.js"></script>
+    <script src="assets/js/sweetalert.min.js"></script>
+    <script>
+        const url = window.location.href;
+
+        if (url.indexOf("#error") > -1) {
+        swal("Wrong Username or Password", "GMS - Guidance Monitoring System", "error");
+        }
+    </script>
 </body>
 
 </html>

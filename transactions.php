@@ -1,3 +1,6 @@
+<?php
+include_once "functions/authentications.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,6 +63,12 @@
     <a class="nav-link" href="customers.php">
       <i class="fas fa-fw fa-users"></i>
       <span>Customer Section</span></a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="functions/user-logout.php">
+      <i class="fas fa-fw fa-users"></i>
+      <span>Logout</span></a>
   </li>
 
   <hr class="sidebar-divider d-none d-md-block">
@@ -161,17 +170,12 @@
                                 </optgroup>
                             </select></div>
                         <div><label class="form-label">Car</label><select class="form-select">
-                                <optgroup label="Choose Color">
+                                <optgroup label="Choose Car">
                                     <option value="1" selected="">Taxi</option>
                                     <option value="13">This is item 2</option>
                                 </optgroup>
                             </select></div>
-                        <div><label class="form-label">Color</label><select class="form-select">
-                                <optgroup label="Choose Customer">
-                                    <option value="1" selected="">Gold</option>
-                                    <option value="13">This is item 2</option>
-                                </optgroup>
-                            </select></div>
+                       
                         <div><label class="form-label">Borrow</label><input class="form-control" type="date"></div>
                         <div><label class="form-label">Return</label><input class="form-control" type="date"></div>
                     </form>
