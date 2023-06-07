@@ -1,5 +1,6 @@
 <?php
 include_once "functions/authentications.php";
+include_once 'functions/views.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -111,7 +112,7 @@ include_once "functions/authentications.php";
                                     <div class="row align-items-center no-gutters">
                                         <div class="col mr-2">
                                             <div class="text-uppercase text-primary text-xs font-weight-bold mb-1"><span>Available Cars</span></div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span>1/1</span></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span><?php get_cars_count(); ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-car fa-2x text-gray-500"></i></div>
                                     </div>
@@ -126,7 +127,7 @@ include_once "functions/authentications.php";
                                             <div class="text-uppercase text-info text-xs font-weight-bold mb-1"><span>Customers</span></div>
                                             <div class="row align-items-center no-gutters">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><span>1</span></div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><span><?php get_customers_count(); ?></span></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -141,7 +142,7 @@ include_once "functions/authentications.php";
                                     <div class="row align-items-center no-gutters">
                                         <div class="col mr-2">
                                             <div class="text-uppercase text-success text-xs font-weight-bold mb-1"><span>Transactions</span></div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span>₱ 2000</span></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span>₱ <?php get_transactions_sales(); ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-money-bill-alt fa-2x text-gray-500"></i></div>
                                     </div>
@@ -154,7 +155,7 @@ include_once "functions/authentications.php";
                                     <div class="row align-items-center no-gutters">
                                         <div class="col mr-2">
                                             <div class="text-uppercase text-danger text-xs font-weight-bold mb-1"><span>Completed Rentals</span></div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span>1</span></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span><?php get_transactions_returned(); ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-check-double fa-2x text-gray-500"></i></div>
                                     </div>
@@ -173,10 +174,12 @@ include_once "functions/authentications.php";
                                             <div class="dropdown-divider"></div><a class="dropdown-item" href="#">All Cars</a>
                                         </div>
                                     </div>
-                                </div><ul class="list-group list-group-flush">
-                    <a href="admin/car" class="list-group-item list-group-item-action">
-                <i class="fas fa-car"></i> asd                <span class="badge badge-pill badge-success">Available</span>            </a>
-                </ul>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <?php
+                                     new_cars();    
+                                    ?>
+                                </ul>
                             </div>
                         </div>
                         <div class="col-6">
@@ -189,10 +192,12 @@ include_once "functions/authentications.php";
                                             <div class="dropdown-divider"></div><a class="dropdown-item" href="#">All</a>
                                         </div>
                                     </div>
-                                </div><ul class="list-group list-group-flush">
-                    <a href="admin/costumer" class="list-group-item list-group-item-action">
-                <i class="fas fa-user-circle"></i> asd                 <span class="badge badge-primary badge-pill"><i class="fas fa-male"></i></span>            </a>
-                </ul>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <?php
+                                        new_customers();
+                                    ?>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -229,17 +234,9 @@ include_once "functions/authentications.php";
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr role="row" class="odd">
-                                                                    <td class="sorting_1">03/06/2023</td>
-                                                                    <td>asd</td>
-                                                                    <td>asd</td>
-                                                                    <td>gold</td>
-                                                                    <td>04/06/2023</td>
-                                                                    <td>05/06/2023</td>
-                                                                    <td>₱ 500</td>
-                                                                    <td>₱ 1,000</td>
-                                                                    <td class="text-center"><i class="fas fa-check-circle" style="color: green;"></i> Finished</td>
-                                                                </tr>
+                                                               <?php
+                                                                view_all_transactions();
+                                                               ?>
                                                             </tbody>
                                                         </table>
                                                     </div>

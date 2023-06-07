@@ -1,5 +1,6 @@
 <?php
 include_once "functions/authentications.php";
+include_once 'functions/views.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +8,7 @@ include_once "functions/authentications.php";
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Dashboard - Car Rental System</title>
+    <title>Customers - Car Rental System</title>
     <meta name="description" content="CRS - Car Rental System">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
@@ -123,14 +124,9 @@ include_once "functions/authentications.php";
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr role="row" class="odd">
-                                                            <td class="sorting_1">1</td>
-                                                            <td>asd</td>
-                                                            <td>Male</td>
-                                                            <td><i class="fas fa-phone-volume"></i> 132123132<br><i class="fas fa-id-card-alt"></i> 1213321@gmail.com</td>
-                                                            <td>asdasdsadsad</td>
-                                                            <td><button class="btn btn-success btn-sm" type="button" data-bs-target="#update" data-bs-toggle="modal"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-sm btn-hapus" data-bs-target="#remove" data-bs-toggle="modal" type="button"><i class="fas fa-trash"></i></button></td>
-                                                        </tr>
+                                                        <?php 
+                                                        view_customers();
+                                                        ?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -156,20 +152,21 @@ include_once "functions/authentications.php";
                     <h4 class="modal-title">Create Customer</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div><label class="form-label">Customer Fullname</label><input class="form-control" type="text"></div>
-                        <div><label class="form-label">Customer Address</label><input class="form-control" type="text"></div>
-                        <div><label class="form-label">Customer Email</label><input class="form-control" type="email"></div>
-                        <div><label class="form-label">Customer Phone</label><input class="form-control" type="tel" required="" maxlength="13" minlength="13" pattern="^(\+639|\d{11})$"></div>
-                        <div><label class="form-label">Sex</label><select class="form-select">
+                    <form action="functions/create-customer.php" method="post">
+                        <div><label class="form-label">Customer Fullname</label><input class="form-control" type="text" name="fullname" require ></div>
+                        <div><label class="form-label">Customer Address</label><input class="form-control" type="text" name="address" require ></div>
+                        <div><label class="form-label">Customer Email</label><input class="form-control" type="email" name="email" require ></div>
+                        <div><label class="form-label">Customer Phone</label><input class="form-control" type="tel" name="phone" required="" maxlength="11" minlength="11" pattern="[0-9]+""></div>
+                        <div><label class="form-label">Sex</label><select class="form-select" name="sex">
                                 <optgroup label="Sex">
                                     <option value="Male" selected="">Male</option>
                                     <option value="Female">Female</option>
                                 </optgroup>
                             </select></div>
-                    </form>
+                    
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="button">Save</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="submit">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -180,20 +177,22 @@ include_once "functions/authentications.php";
                     <h4 class="modal-title">Update Customer</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div><label class="form-label">Customer Fullname</label><input class="form-control" type="text"></div>
-                        <div><label class="form-label">Customer Address</label><input class="form-control" type="text"></div>
-                        <div><label class="form-label">Customer Email</label><input class="form-control" type="email"></div>
-                        <div><label class="form-label">Customer Phone</label><input class="form-control" type="tel" required="" maxlength="13" minlength="13" pattern="^(\+639|\d{11})$"></div>
-                        <div><label class="form-label">Sex</label><select class="form-select">
+                <form action="functions/update-customer.php" method="post"> 
+                        <input type="hidden" name="data_id">
+                        <div><label class="form-label">Customer Fullname</label><input class="form-control" type="text" name="fullname" require ></div>
+                        <div><label class="form-label">Customer Address</label><input class="form-control" type="text" name="address" require ></div>
+                        <div><label class="form-label">Customer Email</label><input class="form-control" type="email" name="email" require ></div>
+                        <div><label class="form-label">Customer Phone</label><input class="form-control" type="tel" name="phone" required="" maxlength="11" minlength="11" pattern="[0-9]+""></div>
+                        <div><label class="form-label">Sex</label><select class="form-select" name="sex">
                                 <optgroup label="Sex">
                                     <option value="Male" selected="">Male</option>
                                     <option value="Female">Female</option>
                                 </optgroup>
                             </select></div>
-                    </form>
-                </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="button">Save</button></div>
+                    
+                    </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="submit">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -206,11 +205,68 @@ include_once "functions/authentications.php";
                 <div class="modal-body">
                     <p>Are you sure you want to remove this customer?</p>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="button">Remove</button></div>
+                <form action="functions/remove-customer.php" method="post">
+                <input type="hidden" name="data_id">
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="submit">Remove</button></div>
+                </form>
             </div>
         </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/sweetalert.min.js"></script>
+    <script>
+        const url = window.location.href;
+
+        if (url.indexOf("#success") > -1) {
+        swal("Success", "CRS - Car Rental System", "success");
+        }
+
+        if (url.indexOf("#error") > -1) {
+        swal("Error", "CRS - Car Rental System", "error");
+        }
+
+        $('button[data-bs-target="#update"]').on('click', function() {
+            var id = $(this).data('id');
+            var fullname = $(this).data('fullname');
+            var address = $(this).data('address');
+            var email = $(this).data('email');
+            var phone = $(this).data('phone');
+            var sex = $(this).data('sex');
+            
+
+            console.log(id, fullname, address, email, phone, sex);
+
+            $('input[name="data_id"]').each(function() {
+                $(this).val(id);
+            });
+            $('input[name="fullname"]').each(function() {
+                $(this).val(fullname);
+            });
+            $('input[name="address"]').each(function() {
+                $(this).val(address);
+            });
+            $('input[name="email"]').each(function() {
+                $(this).val(email);
+            });
+            $('input[name="phone"]').each(function() {
+                $(this).val(phone);
+            });
+            $('input[name="sex"]').each(function() {
+                $(this).val(sex);
+            });
+            
+        });
+
+
+        $('button[data-bs-target="#remove"]').on('click', function() {
+            var id = $(this).data('id');
+            console.log(id);
+            $('input[name="data_id"]').each(function() {
+                $(this).val(id);
+            });
+        });
+
+    </script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/datatables-demo.js"></script>
     <script src="assets/js/dataTables.bootstrap4.js"></script>

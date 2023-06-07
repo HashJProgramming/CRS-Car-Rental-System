@@ -1,5 +1,7 @@
 <?php
 include_once "functions/authentications.php";
+include_once "functions/views.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +9,7 @@ include_once "functions/authentications.php";
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Dashboard - Car Rental System</title>
+    <title>Transactions - Car Rental System</title>
     <meta name="description" content="CRS - Car Rental System">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
@@ -93,7 +95,8 @@ include_once "functions/authentications.php";
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small">Administrator</span><i class="fas fa-user-tie fa-fw" style="font-size: 26px;color: var(--bs-red);"></i></a>
                                     <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a><a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity log</a>
-                                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#">
+                                            <i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
                                     </div>
                                 </div>
                             </li>
@@ -126,17 +129,9 @@ include_once "functions/authentications.php";
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr role="row" class="odd">
-                                                            <td class="sorting_1">1</td>
-                                                            <td>03/06/2023</td>
-                                                            <td><i class="fas fa-user"></i> asd<br><hr><i class="fas fa-car"></i> asd</td>
-                                                            <td><i class="fas fa-color"></i> gold</td>
-                                                            <td>04/06/2023<br><hr>05/06/2023</td>
-                                                            <td>₱ 500</td>
-                                                            <td>--</td>
-                                                            <td>₱ 0</td>
-                                                            <td><button class="btn btn-info btn-sm btn-block" type="button" data-bs-target="#return" data-bs-toggle="modal"><i class="fas fa-check"></i></button><button class="btn btn-danger btn-sm btn-block" type="button" data-bs-target="#remove" data-bs-toggle="modal"><i class="fas fa-trash"></i></button></td>
-                                                        </tr>
+                                                        <?php
+                                                        view_transactions();
+                                                        ?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -162,25 +157,28 @@ include_once "functions/authentications.php";
                     <h4 class="modal-title">New Transaction</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div><label class="form-label">Customer</label><select class="form-select">
+                    <form action="functions/create-transactions.php" method="post">
+                        <div><label class="form-label">Customer</label><select class="form-select" name="customer_id">
                                 <optgroup label="Choose Customer">
-                                    <option value="1" selected="">customer</option>
-                                    <option value="13">This is item 2</option>
+                                    <?php
+                                        get_customers();
+                                    ?>
                                 </optgroup>
                             </select></div>
-                        <div><label class="form-label">Car</label><select class="form-select">
+                        <div><label class="form-label">Car</label><select class="form-select" name="car_id">
                                 <optgroup label="Choose Car">
-                                    <option value="1" selected="">Taxi</option>
-                                    <option value="13">This is item 2</option>
+                                    <?php
+                                        get_cars();
+                                    ?>
                                 </optgroup>
                             </select></div>
                        
-                        <div><label class="form-label">Borrow</label><input class="form-control" type="date"></div>
-                        <div><label class="form-label">Return</label><input class="form-control" type="date"></div>
-                    </form>
+                        <div><label class="form-label">Borrow</label><input class="form-control" type="date" name="borrow"></div>
+                        <div><label class="form-label">Return</label><input class="form-control" type="date" name="return"></div>
+                    
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="button">Save</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="submit">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -193,7 +191,11 @@ include_once "functions/authentications.php";
                 <div class="modal-body">
                     <p>Are you sure this car is already return?</p>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="button">Save</button></div>
+                <form action="functions/return-car.php" method="post">
+                <input type="hidden" name="data_id">
+                <input type="hidden" name="car_id">
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="submit">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -206,11 +208,51 @@ include_once "functions/authentications.php";
                 <div class="modal-body">
                     <p>Are you sure you want to remove this transaction?</p>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="button">Save</button></div>
+                <form action="functions/remove-transaction.php" method="post">
+                <input type="hidden" name="data_id">
+                <input type="hidden" name="car_id">
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="submit">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/sweetalert.min.js"></script>
+    <script>
+        const url = window.location.href;
+
+        if (url.indexOf("#success") > -1) {
+        swal("Success", "CRS - Car Rental System", "success");
+        }
+
+        if (url.indexOf("#error") > -1) {
+        swal("Error", "CRS - Car Rental System", "error");
+        }
+
+        $('button[data-bs-target="#remove"]').on('click', function() {
+            var id = $(this).data('id');
+            var car = $(this).data('car');
+            console.log(id, car);
+            $('input[name="data_id"]').each(function() {
+                $(this).val(id);
+            });
+            $('input[name="car_id"]').each(function() {
+                $(this).val(car);
+            });
+        });
+
+        $('button[data-bs-target="#return"]').on('click', function() {
+            var id = $(this).data('id');
+            var car = $(this).data('car');
+            console.log(id, car);
+            $('input[name="data_id"]').each(function() {
+                $(this).val(id);
+            });
+            $('input[name="car_id"]').each(function() {
+                $(this).val(car);
+            });
+        });
+    </script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/datatables-demo.js"></script>
     <script src="assets/js/dataTables.bootstrap4.js"></script>

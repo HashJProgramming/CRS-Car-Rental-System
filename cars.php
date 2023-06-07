@@ -1,5 +1,7 @@
 <?php
 include_once "functions/authentications.php";
+include_once "functions/views.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +9,7 @@ include_once "functions/authentications.php";
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Dashboard - Car Rental System</title>
+    <title>Car Section - Car Rental System</title>
     <meta name="description" content="CRS - Car Rental System">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
@@ -28,51 +30,52 @@ include_once "functions/authentications.php";
                     <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-car fa-fw"></i></div>
                     <div class="sidebar-brand-text mx-3"><span class="text-center">Car Rental<br>&nbsp;System</span></div>
                 </a>
-                <hr class="sidebar-divider my-0"><ul id="accordionSidebar" class="navbar-nav text-light">
-  <hr class="sidebar-divider my-0">
+                <hr class="sidebar-divider my-0">
+                <ul id="accordionSidebar" class="navbar-nav text-light">
+                    <hr class="sidebar-divider my-0">
 
-  <li class="nav-item active">
-    <a class="nav-link" href="dashboard.php">
-      <i class="fas fa-fw fa-home"></i>
-      <span>Dashboard</span></a>
-  </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="dashboard.php">
+                            <i class="fas fa-fw fa-home"></i>
+                            <span>Dashboard</span></a>
+                    </li>
 
-  <hr class="sidebar-divider">
+                    <hr class="sidebar-divider">
 
-  <div class="sidebar-heading">Transaction</div>
+                    <div class="sidebar-heading">Transaction</div>
 
-  <li class="nav-item">
-    <a class="nav-link" href="transactions.php">
-      <i class="fas fa-fw fa-cog"></i>
-      <span>Rentals</span>
-    </a>
-  </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="transactions.php">
+                            <i class="fas fa-fw fa-cog"></i>
+                            <span>Rentals</span>
+                        </a>
+                    </li>
 
-  <hr class="sidebar-divider">
+                    <hr class="sidebar-divider">
 
-  <div class="sidebar-heading">Data Master</div>
+                    <div class="sidebar-heading">Data Master</div>
 
-  <li class="nav-item">
-    <a class="nav-link" href="cars.php">
-      <i class="fas fa-fw fa-car"></i>
-      <span> Car Section</span>
-    </a>
-  </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cars.php">
+                            <i class="fas fa-fw fa-car"></i>
+                            <span> Car Section</span>
+                        </a>
+                    </li>
 
-  <li class="nav-item">
-    <a class="nav-link" href="customers.php">
-      <i class="fas fa-fw fa-users"></i>
-      <span>Customer Section</span></a>
-  </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="customers.php">
+                            <i class="fas fa-fw fa-users"></i>
+                            <span>Customer Section</span></a>
+                    </li>
 
-  <li class="nav-item">
-    <a class="nav-link" href="functions/user-logout.php">
-      <i class="fas fa-fw fa-users"></i>
-      <span>Logout</span></a>
-  </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="functions/user-logout.php">
+                            <i class="fas fa-fw fa-users"></i>
+                            <span>Logout</span></a>
+                    </li>
 
-  <hr class="sidebar-divider d-none d-md-block">
-</ul>
+                    <hr class="sidebar-divider d-none d-md-block">
+                </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
         </nav>
@@ -124,15 +127,9 @@ include_once "functions/authentications.php";
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr class="odd" role="row">
-                                                            <td class="sorting_1">1</td>
-                                                            <td>asd</td>
-                                                            <td>asd</td>
-                                                            <td>asd</td>
-                                                            <td>500</td>
-                                                            <td> Not Available </td>
-                                                            <td><button class="btn btn-success btn-sm" role="button" data-bs-target="#update" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-sm btn-hapus" role="button" data-bs-target="#remove" data-bs-toggle="modal" type="button"><i class="fas fa-trash"></i></button></td>
-                                                        </tr>
+                                                        <?php
+                                                            view_cars();
+                                                        ?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -151,6 +148,7 @@ include_once "functions/authentications.php";
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
+
     <div class="modal fade" role="dialog" tabindex="-1" id="add">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -158,7 +156,7 @@ include_once "functions/authentications.php";
                     <h4 class="modal-title">Create Car</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="functions/create-car.php" method="POST">
                         <div><label class="form-label">Name</label><input class="form-control" type="text" name="name" placeholder="Car name" required=""></div>
                         <div><label class="form-label">Brand/Manufacturer</label><input class="form-control" type="text" name="brand" placeholder="Car Brand" required=""></div>
                         <div><label class="form-label">Color</label><input class="form-control" type="text" placeholder="Car Color" name="color" required=""></div>
@@ -169,9 +167,12 @@ include_once "functions/authentications.php";
                                     <option value="0">Not Available</option>
                                 </optgroup>
                             </select></div>
-                    </form>
+                    
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="button">Save</button></div>
+                <div class="modal-footer">
+                <button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button>
+                <button class="btn btn-danger" type="submit">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -182,7 +183,8 @@ include_once "functions/authentications.php";
                     <h4 class="modal-title">Update Car</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="functions/update-car.php" method="post">
+                        <input type="hidden" name="data_id">
                         <div><label class="form-label">Name</label><input class="form-control" type="text" name="name" placeholder="Car name" required=""></div>
                         <div><label class="form-label">Brand/Manufacturer</label><input class="form-control" type="text" name="brand" placeholder="Car Brand" required=""></div>
                         <div><label class="form-label">Color</label><input class="form-control" type="text" placeholder="Car Color" name="color" required=""></div>
@@ -191,9 +193,10 @@ include_once "functions/authentications.php";
                                 <option value="0">Not Available</option>
                                 <option value="1" selected="">Available</option>
                             </select></div>
-                    </form>
+                    
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="button">Save</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="submit">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -206,11 +209,69 @@ include_once "functions/authentications.php";
                 <div class="modal-body">
                     <p>Are you sure you want to remove this car?</p>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="button">Remove</button></div>
+                <form action="functions/remove-car.php" method="post">
+                    <input type="hidden" name="data_id">
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="submit">Remove</button></div>
+                </form>
             </div>
         </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/sweetalert.min.js"></script>
+    <script>
+        const url = window.location.href;
+
+        if (url.indexOf("#success") > -1) {
+        swal("Success", "CRS - Car Rental System", "success");
+        }
+
+        if (url.indexOf("#error") > -1) {
+        swal("Error", "CRS - Car Rental System", "error");
+        }
+
+        $('button[data-bs-target="#update"]').on('click', function() {
+            var id = $(this).data('id');
+            var name = $(this).data('name');
+            var brand = $(this).data('brand');
+            var color = $(this).data('color');
+            var price = $(this).data('price');
+            
+            if ($(this).data('status') == 1) {
+                var status = "Available";
+            } else {
+                var status =  "Not Available";
+            }
+
+            console.log(id, name, brand, color, price, status);
+
+            $('input[name="data_id"]').each(function() {
+                $(this).val(id);
+            });
+            $('input[name="name"]').each(function() {
+                $(this).val(name);
+            });
+            $('input[name="brand"]').each(function() {
+                $(this).val(brand);
+            });
+            $('input[name="color"]').each(function() {
+                $(this).val(color);
+            });
+            $('input[name="price"]').each(function() {
+                $(this).val(price);
+            });
+            
+        });
+
+
+        $('button[data-bs-target="#remove"]').on('click', function() {
+            var id = $(this).data('id');
+            console.log(id);
+            $('input[name="data_id"]').each(function() {
+                $(this).val(id);
+            });
+        });
+
+    </script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/datatables-demo.js"></script>
     <script src="assets/js/dataTables.bootstrap4.js"></script>

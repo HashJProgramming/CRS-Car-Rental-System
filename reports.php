@@ -1,5 +1,6 @@
 <?php
 include_once "functions/authentications.php";
+include_once "functions/views.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +8,7 @@ include_once "functions/authentications.php";
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Dashboard - Car Rental System</title>
+    <title>Reports - Car Rental System</title>
     <meta name="description" content="CRS - Car Rental System">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
@@ -102,7 +103,7 @@ include_once "functions/authentications.php";
                 </nav>
                 <div class="container-fluid">
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Report</h1><a class="btn btn-primary btn-sm shadow-sm d-none d-sm-inline-block" role="button" href="#"><i class="fas fa-print text-white-50 fa-sm"></i> Print Report</a>
+                        <h1 class="h3 mb-0 text-gray-800">Report</h1><a class="btn btn-primary btn-sm shadow-sm d-none d-sm-inline-block" role="button" href="#" id="print"><i class="fas fa-print text-white-50 fa-sm"></i> Print Report</a>
                     </div>
                     <div class="card shadow mb-4"></div>
                     <div class="row">
@@ -112,7 +113,7 @@ include_once "functions/authentications.php";
                                     <div class="row align-items-center no-gutters">
                                         <div class="col mr-2">
                                             <div class="text-uppercase text-primary text-xs font-weight-bold mb-1"><span>Available Cars</span></div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span>1/1</span></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span><?php get_cars_count(); ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-car fa-2x text-gray-500"></i></div>
                                     </div>
@@ -127,7 +128,7 @@ include_once "functions/authentications.php";
                                             <div class="text-uppercase text-info text-xs font-weight-bold mb-1"><span>Customers</span></div>
                                             <div class="row align-items-center no-gutters">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><span>1</span></div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><span><?php get_customers_count(); ?></span></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -142,7 +143,7 @@ include_once "functions/authentications.php";
                                     <div class="row align-items-center no-gutters">
                                         <div class="col mr-2">
                                             <div class="text-uppercase text-success text-xs font-weight-bold mb-1"><span>Transactions</span></div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span>₱ 2000</span></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span>₱ <?php get_transactions_sales(); ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-money-bill-alt fa-2x text-gray-500"></i></div>
                                     </div>
@@ -155,7 +156,7 @@ include_once "functions/authentications.php";
                                     <div class="row align-items-center no-gutters">
                                         <div class="col mr-2">
                                             <div class="text-uppercase text-danger text-xs font-weight-bold mb-1"><span>Completed Rentals</span></div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span>1</span></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span><?php get_transactions_returned(); ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-check-double fa-2x text-gray-500"></i></div>
                                     </div>
@@ -170,9 +171,22 @@ include_once "functions/authentications.php";
                     <div class="text-center my-auto copyright"><span>Copyright © Car Rental System 2023</span></div>
                 </div>
             </footer>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
     <script src="assets/js/jquery.min.js"></script>
+    <script>
+
+    function printTable() {
+        var data = $("#content-wrapper").html();
+        var win = window.open("about:blank");
+        win.document.write('<html><head><title>PRINT</title><link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap"><link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css"><link rel="stylesheet" href="assets/css/dataTables.bootstrap4-1.css"><link rel="stylesheet" href="assets/css/dataTables.bootstrap4.css"><link rel="stylesheet" href="assets/css/dataTables.bootstrap4.min.css"><link rel="stylesheet" href="assets/css/Login-Form-Basic-icons.css"><link rel="stylesheet" href="assets/css/sb-admin-2.css"><link rel="stylesheet" href="assets/css/sb-admin-2.min.css"><link rel="stylesheet" href="assets/css/sweetalert.css"></head><body>' +
+        data + '</body></html>');
+        win.print();
+    }
+        // Attach the print event to the print button
+        $("#print").on("click", printTable);
+    </script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/datatables-demo.js"></script>
     <script src="assets/js/dataTables.bootstrap4.js"></script>

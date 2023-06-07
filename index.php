@@ -12,7 +12,7 @@ if(isset(  $_SESSION['username'])){
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Dashboard - Car Rental System</title>
+    <title>Car Rental System</title>
     <meta name="description" content="CRS - Car Rental System">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
@@ -67,7 +67,7 @@ if(isset(  $_SESSION['username'])){
         const url = window.location.href;
 
         if (url.indexOf("#error") > -1) {
-        swal("Wrong Username or Password", "GMS - Guidance Monitoring System", "error");
+        swal("Wrong Username or Password", "CRS - Car Rental System", "error");
         }
     </script>
 </body>
