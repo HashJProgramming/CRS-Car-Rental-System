@@ -17,11 +17,6 @@ $price = $row['price'];
 // Convert the data to datetime
 $borrow_date = new DateTime($borrow_date);
 $return_date = new DateTime($return_date);
-// check if the borrow date is in the past
-if ($borrow_date < new DateTime()) {
-    header('location: ../transactions.php#error');
-    exit;
-}
 
 // Check if the check out date is in the past
 if ($return_date <= $borrow_date) {
