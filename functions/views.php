@@ -166,7 +166,7 @@
     function new_cars(){
         $db = new PDO('mysql:host=localhost;dbname=car_rental', 'root', '');
         // Get all data from the cars table
-        $sql = 'SELECT * FROM cars ORDER BY created_at ASC LIMIT 5';
+        $sql = 'SELECT * FROM cars ORDER BY created_at DESC LIMIT 5';
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $results = $stmt->fetchAll();
@@ -183,7 +183,7 @@
     function new_customers(){
         $db = new PDO('mysql:host=localhost;dbname=car_rental', 'root', '');
         // Get all data from the cars table
-        $sql = 'SELECT * FROM customers ORDER BY created_at ASC LIMIT 5';
+        $sql = 'SELECT * FROM customers ORDER BY created_at DESC LIMIT 5';
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $results = $stmt->fetchAll();
